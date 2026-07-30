@@ -20,7 +20,7 @@ with open(os.path.join(BASE_DIR, "feature_cols.txt"), "r") as f:
 
 df = pd.read_csv(os.path.join(BASE_DIR, "dashboard_data.csv"))
 
-df = pd.read_csv("compressor_features.csv")
+df = pd.read_csv("dashboard_data.csv")
 df["timestamp"]       = pd.to_datetime(df["timestamp"])
 df["target"]          = df["failure_label"].apply(lambda x: 0 if x in [0, 4] else 1)
 df["predicted"]       = model.predict(df[feature_cols])
