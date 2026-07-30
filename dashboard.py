@@ -9,12 +9,16 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 # ── Load model and data ─────────────────────────────────────────
-print("Loading data and model...")
-with open("compressor_model.pkl", "rb") as f:
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+with open(os.path.join(BASE_DIR, "compressor_model.pkl"), "rb") as f:
     model = pickle.load(f)
 
-with open("feature_cols.txt", "r") as f:
+with open(os.path.join(BASE_DIR, "feature_cols.txt"), "r") as f:
     feature_cols = f.read().splitlines()
+
+df = pd.read_csv(os.path.join(BASE_DIR, "dashboard_data.csv"))
 
 df = pd.read_csv("compressor_features.csv")
 df["timestamp"]       = pd.to_datetime(df["timestamp"])
